@@ -297,10 +297,10 @@ export default function App() {
             <span className="nominal">SYSTEMS NOMINAL</span>
           </div>
 
-          <h3>
+          <h2>
             A FULL STACK WEB DEVELOPER WITH KEEN INTEREST IN
             <span> ELECTRONICS AND EMBEDDED SYSTEMS</span>
-          </h3>
+          </h2>
 
           <p>
             I am an Avionics Engineering student with a keen interest in electronics,
