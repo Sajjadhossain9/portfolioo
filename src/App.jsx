@@ -123,46 +123,6 @@ function SectionHeading({ index, label, title, copy }) {
   );
 }
 
-function ProjectVisual({ type }) {
-  if (type === "schedule") {
-    return (
-      <div className="project-visual schedule-visual" aria-hidden="true">
-        <div className="mini-top"><i /><i /><i /><span /></div>
-        <div className="schedule-days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span></div>
-        <div className="schedule-slots">
-          {Array.from({ length: 15 }, (_, index) => <i key={index} />)}
-        </div>
-        <div className="schedule-alert"><i /> NEXT LAB / 14:30</div>
-      </div>
-    );
-  }
-
-  if (type === "waveform") {
-    return (
-      <div className="project-visual waveform-visual" aria-hidden="true">
-        <span>f(t) / SIGNAL MODEL</span>
-        <svg viewBox="0 0 620 220" preserveAspectRatio="none">
-          <path className="wave-grid" d="M0 55H620M0 110H620M0 165H620M103 0V220M206 0V220M309 0V220M412 0V220M515 0V220" />
-          <path className="wave-one" d="M0 112 C38 20 78 20 116 112 S194 204 232 112 310 20 348 112 426 204 464 112 542 20 620 112" />
-          <path className="wave-two" d="M0 112 C52 58 82 58 128 112 S204 166 254 112 332 58 382 112 458 166 508 112 578 58 620 98" />
-        </svg>
-        <div><b>X</b><b>Y</b><b>Z</b></div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="project-visual interface-visual" aria-hidden="true">
-      <div className="browser-bar"><i /><i /><i /><span /></div>
-      <div className="interface-shell">
-        <aside><i /><i /><i /><i /></aside>
-        <div><span /><strong /><small /><small /><b /></div>
-      </div>
-      <em>RESPONSIVE / 03</em>
-    </div>
-  );
-}
-
 function handleTilt(event) {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   const element = event.currentTarget;
@@ -257,30 +217,15 @@ export default function App() {
             <span className="nominal">SYSTEMS NOMINAL</span>
           </div>
 
-          <h2>
-            FULL STACK WEB DEVELOPER with keen  interest in
-            <span> ELECTRONICS and EMBEDDED SYSTEMS of Aviation</span>
-          </h2>
+          <h1>
+            Full-stack web developer with a keen interest in
+            <span> electronics and embedded systems for aviation.</span>
+          </h1>
 
           <p>
-            I am an Avionics Engineering student with  multidisciplinary hands-on skills
-            in circuit integration, sensor interfacing, PCB design and fabrication,
-            microcontroller- and microprocessor-based systems, and embedded C and Python
-            programming. I have participated in several technical projects at university, 
-            where I applied innovative problem-solving skills and
-            gained practical engineering experience. Passionate about avionics technology
-            and continuous learning, I am eager to contribute my technical knowledge,
-            teamwork, and dedication to real-world engineering projects. Although I am still
-            expanding my technical knowledge, I am highly dedicated to learning and eager to
-            implement new concepts and technologies. 
-            In addition, I am part of a small
-            software service startup where we design, develop, and maintain websites, web
-            applications, and user interfaces as a result of our passion for technology. 
-            
-            Also work part-time as a volunteer with RCY, where I actively participate
-            in initiatives related to national and environmental crises. Through these
-            activities, I have also developed experience in fundraising, team management,
-            coordination, and collaborative work.
+            I am an Avionics Engineering student and full-stack web developer working
+            across electronics, embedded systems, circuit design, and software. I enjoy
+            turning multidisciplinary engineering ideas into practical, reliable systems.
           </p>
 
           <div className="actions">
@@ -326,13 +271,22 @@ export default function App() {
           <div className="profile-statement reveal">
             <span className="coordinate">AVIONICS / EMBEDDED / SOFTWARE</span>
             <p>
-              Currently pursuing a <strong>B.Sc. in Avionics Engineering</strong>,
-              I&apos;m focused on embedded electronics, circuit integration, sensing,
-              control interfaces and the software layer around flight systems.
+              Currently pursuing a <strong>B.Sc. in Avionics Engineering</strong>, I have
+              developed hands-on skills in circuit integration, sensor interfacing, PCB
+              design and fabrication, microcontroller- and microprocessor-based systems,
+              and embedded C and Python programming.
             </p>
             <p>
-              My goal is to grow into an engineer who can understand the full signal
-              path — from a physical sensor to a dependable decision on screen.
+              Through university technical projects, I have applied practical
+              problem-solving skills while continuing to expand my knowledge of avionics
+              technology. I am eager to learn, implement new concepts, and contribute my
+              technical knowledge, teamwork, and dedication to real-world engineering work.
+            </p>
+            <p>
+              I am also part of a small software service startup where we design, develop,
+              and maintain websites, web applications, and user interfaces. Alongside this,
+              I volunteer part-time with RCY and have developed experience in humanitarian
+              initiatives, fundraising, team management, coordination, and collaborative work.
             </p>
           </div>
 
@@ -477,54 +431,6 @@ export default function App() {
               <p>{item.text}</p>
             </article>
           ))}
-        </div>
-      </section>
-
-      <section className="code-lab section shell" id="code">
-        <SectionHeading
-          index="05"
-          label="Software flight deck"
-          title="Ideas translated into working interfaces."
-          copy="Selected public repositories where planning, interaction design and code meet a deployed result."
-        />
-
-        <div className="software-grid">
-          {softwareProjects.map((project, index) => (
-            <article
-              className="software-card reveal tilt-surface"
-              style={{ "--delay": `${index * 80}ms` }}
-              key={project.number}
-              onPointerMove={handleTilt}
-              onPointerLeave={resetTilt}
-            >
-              <header>
-                <span>{project.number}</span>
-                <small><i /> {project.status}</small>
-              </header>
-              <ProjectVisual type={project.type} />
-              <div className="software-copy">
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-                <div className="software-stack">
-                  {project.stack.map((item) => <b key={item}>{item}</b>)}
-                </div>
-              </div>
-              <footer>
-                <a href={project.source} target="_blank" rel="noreferrer">Source code ↗</a>
-                {project.live && <a href={project.live} target="_blank" rel="noreferrer">Live system ↗</a>}
-              </footer>
-            </article>
-          ))}
-        </div>
-
-        <div className="github-bridge reveal">
-          <div>
-            <span>PUBLIC DEVELOPMENT LOG</span>
-            <strong>More experiments, repositories and progress are available on GitHub.</strong>
-          </div>
-          <a className="button secondary" href="https://github.com/Sajjadhossain9?tab=repositories" target="_blank" rel="noreferrer">
-            Open GitHub profile <Arrow />
-          </a>
         </div>
       </section>
 
