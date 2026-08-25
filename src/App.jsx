@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import FlightScene from "./FlightScene";
 
 const capabilityGroups = [
   {
@@ -204,6 +205,25 @@ function ProjectVisual({ type }) {
   );
 }
 
+function handleTilt(event) {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const element = event.currentTarget;
+  const bounds = element.getBoundingClientRect();
+  const x = (event.clientX - bounds.left) / bounds.width;
+  const y = (event.clientY - bounds.top) / bounds.height;
+  element.style.setProperty("--tilt-x", `${(0.5 - y) * 7}deg`);
+  element.style.setProperty("--tilt-y", `${(x - 0.5) * 9}deg`);
+  element.style.setProperty("--glow-x", `${x * 100}%`);
+  element.style.setProperty("--glow-y", `${y * 100}%`);
+}
+
+function resetTilt(event) {
+  event.currentTarget.style.setProperty("--tilt-x", "0deg");
+  event.currentTarget.style.setProperty("--tilt-y", "0deg");
+  event.currentTarget.style.setProperty("--glow-x", "50%");
+  event.currentTarget.style.setProperty("--glow-y", "50%");
+}
+
 export default function App() {
   const [time, setTime] = useState("--:--:--");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -261,9 +281,27 @@ export default function App() {
     return () => window.removeEventListener("keydown", closeOnEscape);
   }, [menuOpen]);
 
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
+
+    const handlePointerGlow = (event) => {
+      document.documentElement.style.setProperty("--pointer-x", `${event.clientX}px`);
+      document.documentElement.style.setProperty("--pointer-y", `${event.clientY}px`);
+    };
+
+    window.addEventListener("pointermove", handlePointerGlow, { passive: true });
+    return () => window.removeEventListener("pointermove", handlePointerGlow);
+  }, []);
+
   return (
     <main>
       <a className="skip-link" href="#profile">Skip to portfolio content</a>
+      <div className="ambient-spectrum" aria-hidden="true">
+        <i className="ambient-orb orb-cyan" />
+        <i className="ambient-orb orb-violet" />
+        <i className="ambient-orb orb-magenta" />
+        <i className="pointer-aura" />
+      </div>
       <nav className="nav" aria-label="Primary navigation">
         <a className="brand" href="#top" aria-label="Sajjad Hossain home" onClick={closeMenu}>
           <BrandMark />
@@ -288,6 +326,7 @@ export default function App() {
           <a href="#profile" onClick={closeMenu}>Profile</a>
           <a href="#systems" onClick={closeMenu}>Systems</a>
           <a href="#missions" onClick={closeMenu}>Missions</a>
+          <a href="#experience" onClick={closeMenu}>Experience</a>
           <a href="#code" onClick={closeMenu}>Code</a>
           <a href="#contact" className="nav-contact" onClick={closeMenu}>Establish contact</a>
         </div>
@@ -341,30 +380,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="hero-visual" role="img" aria-label="Animated avionics identity display">
-          <div className="corners" />
-          <div className="radar large" />
-          <div className="radar small" />
-          <div className="sweep" />
-          <div className="orbit one"><i /></div>
-          <div className="orbit two"><i /></div>
-          <div className="identity-core">
-            <img
-              src="https://avatars.githubusercontent.com/u/219995643?v=4"
-              alt="Md. Sajjad Hossain"
-              width="460"
-              height="460"
-              loading="eager"
-              decoding="async"
-              fetchPriority="high"
-            />
-            <span>SAJJAD / AVIONICS 04</span>
-          </div>
-          <span className="hud-label top">AVN-SYS / ID VERIFIED</span>
-          <span className="hud-label right">ALT 03620<br />HDG 042°</span>
-          <span className="hud-label bottom">TARGET: RELIABLE SYSTEMS</span>
-          <div className="signal"><i /><i /><i /><i /><i /><i /></div>
-        </div>
+        <FlightScene />
       </section>
 
       <section className="profile section shell" id="profile">
@@ -389,7 +405,12 @@ export default function App() {
             </p>
           </div>
 
-          <div className="profile-matrix reveal" aria-label="Profile overview">
+          <div
+            className="profile-matrix reveal tilt-surface"
+            aria-label="Profile overview"
+            onPointerMove={handleTilt}
+            onPointerLeave={resetTilt}
+          >
             <div className="matrix-cell wide">
               <span>EDUCATION STREAM</span>
               <strong>B.Sc. Avionics Engineering</strong>
@@ -419,7 +440,13 @@ export default function App() {
 
         <div className="capability-grid">
           {capabilityGroups.map((capability, index) => (
-            <article className="capability-card reveal" style={{ "--delay": `${index * 70}ms` }} key={capability.code}>
+            <article
+              className="capability-card reveal tilt-surface"
+              style={{ "--delay": `${index * 70}ms` }}
+              key={capability.code}
+              onPointerMove={handleTilt}
+              onPointerLeave={resetTilt}
+            >
               <div className="capability-top">
                 <span>{capability.code}</span>
                 <small><i /> {capability.status}</small>
@@ -452,7 +479,11 @@ export default function App() {
           copy="Select a mission to inspect its objective, engineering scope and technical signal."
         />
 
-        <div className="mission-console reveal">
+        <div
+          className="mission-console reveal tilt-surface"
+          onPointerMove={handleTilt}
+          onPointerLeave={resetTilt}
+        >
           <div className="mission-list" aria-label="Project missions">
             {missions.map((mission) => (
               <button
@@ -529,9 +560,11 @@ export default function App() {
         <div className="software-grid">
           {softwareProjects.map((project, index) => (
             <article
-              className="software-card reveal"
+              className="software-card reveal tilt-surface"
               style={{ "--delay": `${index * 80}ms` }}
               key={project.number}
+              onPointerMove={handleTilt}
+              onPointerLeave={resetTilt}
             >
               <header>
                 <span>{project.number}</span>
