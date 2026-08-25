@@ -257,10 +257,10 @@ export default function App() {
             <span className="nominal">SYSTEMS NOMINAL</span>
           </div>
 
-          <h1>
+          <h2>
             FULL STACK WEB DEVELOPER with keen  interest in
             <span> ELECTRONICS and EMBEDDED SYSTEMS of Aviation</span>
-          </h1>
+          </h2>
 
           <p>
             I am an Avionics Engineering student with  multidisciplinary hands-on skills
