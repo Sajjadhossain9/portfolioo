@@ -250,8 +250,20 @@ export default function App() {
 
   const closeMenu = () => setMenuOpen(false);
 
+  useEffect(() => {
+    if (!menuOpen) return undefined;
+
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [menuOpen]);
+
   return (
     <main>
+      <a className="skip-link" href="#profile">Skip to portfolio content</a>
       <nav className="nav" aria-label="Primary navigation">
         <a className="brand" href="#top" aria-label="Sajjad Hossain home" onClick={closeMenu}>
           <BrandMark />
@@ -329,7 +341,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="hero-visual" aria-label="Animated avionics identity display">
+        <div className="hero-visual" role="img" aria-label="Animated avionics identity display">
           <div className="corners" />
           <div className="radar large" />
           <div className="radar small" />
@@ -441,7 +453,7 @@ export default function App() {
         />
 
         <div className="mission-console reveal">
-          <div className="mission-list" role="list" aria-label="Project missions">
+          <div className="mission-list" aria-label="Project missions">
             {missions.map((mission) => (
               <button
                 key={mission.id}
@@ -458,7 +470,7 @@ export default function App() {
             ))}
           </div>
 
-          <article className="mission-display" key={activeMission.id}>
+          <article className="mission-display" key={activeMission.id} aria-live="polite">
             <div className="display-grid" aria-hidden="true" />
             <div className="display-status">
               <span><i /> DATA LINK ACTIVE</span>
@@ -472,7 +484,7 @@ export default function App() {
                 {activeMission.tags.map((tag) => <b key={tag}>{tag}</b>)}
               </div>
             </div>
-            <div className="mission-readout" aria-label={`Mission signal ${activeMission.signal} percent`}>
+            <div className="mission-readout" aria-hidden="true">
               <div className="readout-ring" style={{ "--value": `${activeMission.signal}%` }}>
                 <strong>{activeMission.signal}</strong>
                 <span>SIG</span>
