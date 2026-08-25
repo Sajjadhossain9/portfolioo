@@ -32,12 +32,12 @@ const capabilityGroups = [
 
 const missions = [
   {
-    id: "rocket",
+    id: "Avionics",
     number: "M-01",
-    title: "Rocket avionics",
-    subtitle: "Team Shunno / Flight systems",
+    title: "Avionics Systems",
+    subtitle: "Flight systems",
     description:
-      "Developing the electronics layer of a student rocket: controller integration, navigation, component soldering, Ground Control Station UI and parachute deployment testing.",
+      "Developing the electronics layer of a student grade avionics system: controller integration, navigation, component soldering, Ground Control Station UI and parachute deployment testing.",
     tags: ["MCU / MPU", "Navigation", "GCS UI", "Recovery"],
     metric: "FLIGHT-CRITICAL",
     signal: "87",
@@ -80,12 +80,6 @@ const missions = [
 const experience = [
   {
     period: "PRESENT",
-    role: "Rocket Avionics Team Member",
-    place: "TEAM SHUNNO",
-    text: "Embedded integration, navigation, recovery electronics and GCS interface development.",
-  },
-  {
-    period: "PRESENT",
     role: "Executive Member — Software",
     place: "AAUB DRONE CLUB",
     text: "Control-interface and UI/UX concepts for an aerial surveillance platform.",
@@ -104,40 +98,6 @@ const experience = [
   },
 ];
 
-const softwareProjects = [
-  {
-    number: "C-01",
-    title: "AAUB Routine Companion",
-    type: "schedule",
-    status: "PWA / DEPLOYED",
-    description:
-      "A university routine companion for classes, assignments, lab reminders and exam readiness, designed for fast daily use on mobile.",
-    stack: ["JavaScript", "PWA", "Service Worker"],
-    source: "https://github.com/Sajjadhossain9/aaub-routine-app",
-    live: "https://sajjadhossain9.github.io/aaub-routine-app/",
-  },
-  {
-    number: "C-02",
-    title: "MATLAB Simulation Lab",
-    type: "waveform",
-    status: "MODELING / ACTIVE",
-    description:
-      "A growing collection of numerical experiments and visual models, including waves, polar plots, 3D surfaces, helices and Lissajous figures.",
-    stack: ["MATLAB", "Simulation", "Data Visualization"],
-    source: "https://github.com/Sajjadhossain9/Matlab-Simulation-and-Modeling",
-  },
-  {
-    number: "C-03",
-    title: "Wavnix Web System",
-    type: "interface",
-    status: "TYPESCRIPT / LIVE",
-    description:
-      "A deployed TypeScript web experience focused on modern interface structure, responsive composition and production delivery.",
-    stack: ["TypeScript", "Responsive UI", "Vercel"],
-    source: "https://github.com/Sajjadhossain9/soft12",
-    live: "https://soft12.vercel.app",
-  },
-];
 
 function Arrow() {
   return (
