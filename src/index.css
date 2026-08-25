@@ -118,6 +118,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-
 .button.primary { color: #001014; background: var(--cyan); }
 .button.secondary { border-color: var(--line); color: #c4d5d9; background: rgba(9,24,31,.52); }
 .button.secondary:hover { border-color: var(--line-bright); color: var(--cyan); }
+.button.cv-download { border-color: rgba(247,185,85,.32); color: var(--amber); }
+.button.cv-download:hover { border-color: var(--amber); color: #ffcf7c; }
 .telemetry { display: grid; grid-template-columns: repeat(3,1fr); max-width: 670px; margin-top: 44px; border-block: 1px solid var(--line); }
 .telemetry div { display: grid; gap: 7px; padding: 16px 18px; border-right: 1px solid var(--line); }
 .telemetry div:first-child { padding-left: 0; }

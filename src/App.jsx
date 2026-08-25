@@ -307,6 +307,13 @@ export default function App() {
             >
               GitHub telemetry
             </a>
+            <a
+              className="button secondary cv-download"
+              href={`${import.meta.env.BASE_URL}Sajjad-Hossain-CV-Redacted.pdf`}
+              download="Md-Sajjad-Hossain-CV.pdf"
+            >
+              Download CV <Arrow />
+            </a>
           </div>
 
           <div className="telemetry">
