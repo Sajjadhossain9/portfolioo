@@ -26,7 +26,6 @@ export default function Header() {
           <BrandMark />
           <span>
             <strong>SAJJAD HOSSAIN</strong>
-            <small>AVIONICS / SYSTEMS</small>
           </span>
         </a>
 
