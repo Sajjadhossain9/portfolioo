@@ -30,6 +30,19 @@ function seededValue(index, offset = 0) {
 export default function FlightScene() {
   const canvasRef = useRef(null);
 
+  const handleModelPointer = (event) => {
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
+    const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
+    event.currentTarget.style.setProperty("--model-ry", `${x * 17}deg`);
+    event.currentTarget.style.setProperty("--model-rx", `${y * -10 - 4}deg`);
+  };
+
+  const resetModelPointer = (event) => {
+    event.currentTarget.style.setProperty("--model-ry", "9deg");
+    event.currentTarget.style.setProperty("--model-rx", "-4deg");
+  };
+
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
@@ -347,6 +360,8 @@ export default function FlightScene() {
       className="flight-scene"
       role="img"
       aria-label="Interactive three-dimensional wireframe launch vehicle and avionics telemetry display"
+      onPointerMove={handleModelPointer}
+      onPointerLeave={resetModelPointer}
     >
       <canvas ref={canvasRef} aria-hidden="true" />
       <div className="scene-model-wrap" aria-hidden="true">
