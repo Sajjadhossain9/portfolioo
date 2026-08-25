@@ -228,6 +228,13 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    const elements = document.querySelectorAll(".reveal");
+
+    if (!("IntersectionObserver" in window)) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return undefined;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -237,7 +244,6 @@ export default function App() {
       { threshold: 0.12 },
     );
 
-    const elements = document.querySelectorAll(".reveal");
     elements.forEach((element) => observer.observe(element));
     return () => observer.disconnect();
   }, []);
@@ -334,6 +340,11 @@ export default function App() {
             <img
               src="https://avatars.githubusercontent.com/u/219995643?v=4"
               alt="Md. Sajjad Hossain"
+              width="460"
+              height="460"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
             />
             <span>SAJJAD / AVIONICS 04</span>
           </div>

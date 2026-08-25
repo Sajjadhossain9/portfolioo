@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sajjadhossain9.github.io/portfolioo/sitemap.xml
