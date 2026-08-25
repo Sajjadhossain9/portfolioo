@@ -1,7 +1,17 @@
 import { useEffect, useState } from "react";
 
-function BrandMark() {
-  return <span className="brand-mark" aria-hidden="true">SH</span>;
+function BrandPortrait() {
+  return (
+    <span className="brand-portrait" aria-hidden="true">
+      <img
+        src={`${import.meta.env.BASE_URL}header-portrait.webp`}
+        alt=""
+        width="48"
+        height="48"
+        decoding="async"
+      />
+    </span>
+  );
 }
 
 export default function Header() {
@@ -23,7 +33,7 @@ export default function Header() {
     <header className="site-header">
       <nav className="nav" aria-label="Primary navigation">
         <a className="brand" href="#top" aria-label="Sajjad Hossain home" onClick={closeMenu}>
-          <BrandMark />
+          <BrandPortrait />
           <span>
             <strong>SAJJAD HOSSAIN</strong>
           </span>
@@ -46,11 +56,18 @@ export default function Header() {
           id="primary-navigation-links"
         >
           <a href="#profile" onClick={closeMenu}>Profile</a>
-          <a href="#systems" onClick={closeMenu}>Systems</a>
-          <a href="#missions" onClick={closeMenu}>Missions</a>
           <a href="#experience" onClick={closeMenu}>Experience</a>
-          <a href="#code" onClick={closeMenu}>Code</a>
+          <a href="#systems" onClick={closeMenu}>Status</a>
           <a href="#contact" className="nav-contact" onClick={closeMenu}>Establish contact</a>
+          <a
+            href="https://www.linkedin.com/in/sajjad-hossain-369929299/"
+            className="nav-hire"
+            target="_blank"
+            rel="noreferrer"
+            onClick={closeMenu}
+          >
+            Hire
+          </a>
         </div>
       </nav>
     </header>
