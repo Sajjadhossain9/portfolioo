@@ -311,12 +311,16 @@ export default function FlightScene() {
       const rect = canvas.getBoundingClientRect();
       pointer.targetX = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
       pointer.targetY = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+      canvas.parentElement.style.setProperty("--model-ry", `${pointer.targetX * 17}deg`);
+      canvas.parentElement.style.setProperty("--model-rx", `${pointer.targetY * -10 - 4}deg`);
       if (reducedMotion) render(0);
     };
 
     const resetPointer = () => {
       pointer.targetX = 0;
       pointer.targetY = 0;
+      canvas.parentElement.style.setProperty("--model-ry", "9deg");
+      canvas.parentElement.style.setProperty("--model-rx", "-4deg");
       if (reducedMotion) render(0);
     };
 
@@ -345,6 +349,46 @@ export default function FlightScene() {
       aria-label="Interactive three-dimensional wireframe launch vehicle and avionics telemetry display"
     >
       <canvas ref={canvasRef} aria-hidden="true" />
+      <div className="scene-model-wrap" aria-hidden="true">
+        <svg className="scene-model" viewBox="0 0 320 520">
+          <defs>
+            <linearGradient id="craftFill" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stopColor="#4fe3ff" stopOpacity=".2" />
+              <stop offset=".46" stopColor="#7f6dff" stopOpacity=".1" />
+              <stop offset="1" stopColor="#ff58bd" stopOpacity=".2" />
+            </linearGradient>
+            <linearGradient id="craftLine" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stopColor="#ff69c5" />
+              <stop offset=".38" stopColor="#67e7ff" />
+              <stop offset=".7" stopColor="#9d7bff" />
+              <stop offset="1" stopColor="#ffb14b" />
+            </linearGradient>
+            <filter id="craftGlow" x="-80%" y="-40%" width="260%" height="190%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+            </filter>
+          </defs>
+          <g className="craft-glow" filter="url(#craftGlow)">
+            <path className="craft-body-fill" d="M160 24 112 132 106 346 129 411 191 411 214 346 208 132Z" />
+            <path className="craft-outline" d="M160 24 112 132 106 346 129 411 191 411 214 346 208 132Z" />
+            <path className="craft-center" d="M160 24V440M112 132 160 166 208 132M106 346 160 316 214 346M129 411 160 382 191 411" />
+            <path className="craft-facet cyan" d="M160 24 112 132 160 166ZM160 166 106 346 160 316ZM160 316 129 411 160 382Z" />
+            <path className="craft-facet violet" d="M160 24 208 132 160 166ZM160 166 214 346 160 316ZM160 316 191 411 160 382Z" />
+            <ellipse className="craft-ring ring-one" cx="160" cy="134" rx="49" ry="18" />
+            <ellipse className="craft-ring ring-two" cx="160" cy="235" rx="54" ry="20" />
+            <ellipse className="craft-ring ring-three" cx="160" cy="345" rx="53" ry="19" />
+            <path className="craft-fin fin-left" d="M108 294 41 391 127 367Z" />
+            <path className="craft-fin fin-right" d="M212 294 279 391 193 367Z" />
+            <path className="craft-engine" d="M130 411 142 447H178L190 411M142 447 160 472 178 447" />
+            <path className="craft-thrust thrust-one" d="M145 457 132 507" />
+            <path className="craft-thrust thrust-two" d="M160 470 160 519" />
+            <path className="craft-thrust thrust-three" d="M175 457 190 507" />
+            <circle className="craft-node node-one" cx="160" cy="24" r="4" />
+            <circle className="craft-node node-two" cx="106" cy="346" r="3" />
+            <circle className="craft-node node-three" cx="214" cy="346" r="3" />
+          </g>
+        </svg>
+      </div>
       <div className="scene-vignette" aria-hidden="true" />
       <div className="scene-brackets" aria-hidden="true" />
       <span className="scene-tag scene-tag-top">3D FLIGHT OBJECT / LIVE</span>

@@ -171,6 +171,31 @@ main { position: relative; isolation: isolate; overflow: clip; }
 .flight-scene::before { position: absolute; inset: 0; z-index: 4; content: ""; pointer-events: none; border-radius: inherit; background: linear-gradient(115deg,rgba(255,255,255,.07),transparent 19%,transparent 78%,rgba(255,85,191,.055)); }
 .flight-scene::after { position: absolute; inset: 0; z-index: 5; content: ""; pointer-events: none; background: repeating-linear-gradient(0deg,transparent 0 4px,rgba(255,255,255,.012) 5px); mix-blend-mode: screen; }
 .flight-scene canvas { display: block; width: 100%; height: 100%; cursor: crosshair; }
+.scene-model-wrap { position: absolute; inset: 8% 19% 7% 20%; z-index: 1; pointer-events: none; animation: craft-float 4.5s ease-in-out infinite alternate; transform-style: preserve-3d; }
+.scene-model { width: 100%; height: 100%; overflow: visible; transform: perspective(850px) rotateX(var(--model-rx,-4deg)) rotateY(var(--model-ry,9deg)) rotateZ(-2deg); transform-style: preserve-3d; transition: transform .18s ease-out; }
+.craft-body-fill { fill: url(#craftFill); stroke: none; }
+.craft-outline,.craft-center,.craft-ring,.craft-facet,.craft-fin,.craft-engine,.craft-thrust { fill: none; vector-effect: non-scaling-stroke; }
+.craft-outline { stroke: url(#craftLine); stroke-width: 2.1; }
+.craft-center { stroke: rgba(220,244,255,.46); stroke-width: 1; stroke-dasharray: 4 6; }
+.craft-facet { stroke-width: 1.35; }
+.craft-facet.cyan { stroke: rgba(82,231,255,.72); }
+.craft-facet.violet { stroke: rgba(183,125,255,.78); }
+.craft-ring { transform-origin: center; stroke-width: 1.5; }
+.ring-one { stroke: #ff69c5; animation: ring-pulse 2.4s ease-in-out infinite alternate; }
+.ring-two { stroke: #68e9ff; animation: ring-pulse 2.4s -.8s ease-in-out infinite alternate; }
+.ring-three { stroke: #aa82ff; animation: ring-pulse 2.4s -1.6s ease-in-out infinite alternate; }
+.craft-fin { stroke-width: 1.8; }
+.fin-left { stroke: #ffb14b; fill: rgba(255,177,75,.07); }
+.fin-right { stroke: #ff5dbf; fill: rgba(255,93,191,.07); }
+.craft-engine { stroke: rgba(113,231,255,.85); stroke-width: 1.65; }
+.craft-thrust { stroke-width: 2; stroke-linecap: round; animation: thrust-pulse .85s ease-in-out infinite alternate; }
+.thrust-one { stroke: rgba(255,83,190,.65); }
+.thrust-two { stroke: rgba(95,228,255,.92); animation-delay: -.32s; }
+.thrust-three { stroke: rgba(255,174,71,.72); animation-delay: -.58s; }
+.craft-node { fill: #fff; }
+.node-one { fill: #ff60bf; }
+.node-two { fill: #64e6ff; }
+.node-three { fill: #ffb14b; }
 .scene-vignette { position: absolute; inset: 0; z-index: 2; pointer-events: none; background: radial-gradient(circle,transparent 44%,rgba(2,4,12,.52) 100%); }
 .scene-brackets { position: absolute; inset: 5%; z-index: 3; pointer-events: none; background: linear-gradient(var(--cyan),var(--cyan)) left top/52px 1px no-repeat,linear-gradient(var(--cyan),var(--cyan)) left top/1px 52px no-repeat,linear-gradient(var(--magenta),var(--magenta)) right top/52px 1px no-repeat,linear-gradient(var(--magenta),var(--magenta)) right top/1px 52px no-repeat,linear-gradient(var(--violet),var(--violet)) left bottom/52px 1px no-repeat,linear-gradient(var(--violet),var(--violet)) left bottom/1px 52px no-repeat,linear-gradient(var(--orange),var(--orange)) right bottom/52px 1px no-repeat,linear-gradient(var(--orange),var(--orange)) right bottom/1px 52px no-repeat; opacity: .5; }
 .scene-tag { position: absolute; z-index: 6; padding: 7px 9px; border: 1px solid rgba(109,199,255,.16); color: #92a9b5; background: rgba(3,8,18,.6); font: 7px/1.6 var(--mono); letter-spacing: .14em; backdrop-filter: blur(10px); }
@@ -401,6 +426,9 @@ main { position: relative; isolation: isolate; overflow: clip; }
 @keyframes dossier { from { opacity: 0; transform: translateX(12px); } }
 @keyframes spectrum-shift { to { background-position: 100% 0; } }
 @keyframes ambient-drift { to { transform: translate3d(8vw,7vh,0) scale(1.13); } }
+@keyframes craft-float { to { transform: translateY(-10px) scale(1.015); } }
+@keyframes ring-pulse { to { opacity: .4; transform: scaleX(.92); } }
+@keyframes thrust-pulse { to { opacity: .28; transform: translateY(7px); } }
 
 @media (max-width: 900px) {
   .menu-button { display: block; }
