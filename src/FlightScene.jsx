@@ -61,7 +61,7 @@ export default function FlightScene() {
       const camera = 6.8;
       const depth = Math.max(2.2, camera + rotated.z);
       const perspective = camera / depth;
-      const scale = Math.min(width, height) * 0.128;
+      const scale = Math.min(width, height) * 0.15;
 
       return {
         x: width * 0.51 + rotated.x * scale * perspective,
@@ -78,8 +78,18 @@ export default function FlightScene() {
       context.moveTo(a.x, a.y);
       context.lineTo(b.x, b.y);
       context.strokeStyle = color;
-      context.lineWidth = lineWidth * ((a.perspective + b.perspective) / 2);
+      context.lineWidth = lineWidth * ((a.perspective + b.perspective) / 2) * 1.35;
       context.stroke();
+    };
+
+    const face3D = (points, yaw, pitch, roll, color) => {
+      const projected = points.map((point) => project(point, yaw, pitch, roll));
+      context.beginPath();
+      context.moveTo(projected[0].x, projected[0].y);
+      projected.slice(1).forEach((point) => context.lineTo(point.x, point.y));
+      context.closePath();
+      context.fillStyle = color;
+      context.fill();
     };
 
     const drawStars = (time) => {
@@ -134,7 +144,7 @@ export default function FlightScene() {
       context.scale(1, 0.42);
       context.beginPath();
       context.arc(0, 0, radius, 0, TAU);
-      context.strokeStyle = "rgba(105, 214, 255, .13)";
+      context.strokeStyle = "rgba(105, 214, 255, .24)";
       context.setLineDash([5, 10]);
       context.lineWidth = 1;
       context.stroke();
@@ -172,6 +182,35 @@ export default function FlightScene() {
 
       context.save();
       context.globalCompositeOperation = "lighter";
+      context.shadowColor = "rgba(80, 220, 255, .65)";
+      context.shadowBlur = 7;
+
+      rings[0].forEach((point, index) => {
+        const next = rings[0][(index + 1) % segmentCount];
+        face3D(
+          [nose, point, next],
+          yaw,
+          pitch,
+          roll,
+          index % 2 === 0 ? "rgba(255, 73, 185, .105)" : "rgba(77, 226, 255, .085)",
+        );
+      });
+
+      for (let ringIndex = 0; ringIndex < rings.length - 1; ringIndex += 1) {
+        rings[ringIndex].forEach((point, index) => {
+          const next = rings[ringIndex][(index + 1) % segmentCount];
+          const below = rings[ringIndex + 1][index];
+          const belowNext = rings[ringIndex + 1][(index + 1) % segmentCount];
+          face3D(
+            [point, next, belowNext, below],
+            yaw,
+            pitch,
+            roll,
+            index % 3 === 0 ? "rgba(102, 92, 255, .075)" : "rgba(67, 223, 255, .042)",
+          );
+        });
+      }
+
       rings.forEach((ring, ringIndex) => {
         ring.forEach((point, index) => {
           const next = ring[(index + 1) % segmentCount];
@@ -183,16 +222,16 @@ export default function FlightScene() {
             pitch,
             roll,
             ringIndex % 2 === 0
-              ? `rgba(77, 226, 255, ${alpha})`
-              : `rgba(160, 102, 255, ${alpha})`,
-            ringIndex === 1 ? 1.5 : 1,
+              ? `rgba(101, 239, 255, ${Math.min(1, alpha + 0.2)})`
+              : `rgba(182, 126, 255, ${Math.min(1, alpha + 0.2)})`,
+            ringIndex === 1 ? 1.8 : 1.3,
           );
         });
       });
 
       rings[0].forEach((point, index) => {
         if (index % 2 === 0) {
-          line3D(nose, point, yaw, pitch, roll, "rgba(255, 95, 194, .72)", 1.35);
+          line3D(nose, point, yaw, pitch, roll, "rgba(255, 103, 201, .96)", 1.7);
         }
       });
 
@@ -204,8 +243,8 @@ export default function FlightScene() {
             yaw,
             pitch,
             roll,
-            index % 4 === 0 ? "rgba(255, 196, 79, .6)" : "rgba(80, 225, 255, .58)",
-            1.1,
+            index % 4 === 0 ? "rgba(255, 196, 79, .9)" : "rgba(91, 236, 255, .82)",
+            1.35,
           );
         }
         line3D(rings[3][index], engine, yaw, pitch, roll, "rgba(153, 101, 255, .55)", 1);
@@ -217,10 +256,12 @@ export default function FlightScene() {
         const rootBottom = { x: side.x * 0.36, y: 1.53, z: side.z * 0.36 };
         const outer = { x: side.x * 1.13, y: 1.43, z: side.z * 1.13 };
         const color = index % 2 === 0 ? "rgba(255, 84, 190, .68)" : "rgba(255, 178, 67, .7)";
-        line3D(rootTop, outer, yaw, pitch, roll, color, 1.2);
-        line3D(outer, rootBottom, yaw, pitch, roll, color, 1.2);
+        line3D(rootTop, outer, yaw, pitch, roll, color, 1.6);
+        line3D(outer, rootBottom, yaw, pitch, roll, color, 1.6);
         line3D(rootBottom, rootTop, yaw, pitch, roll, "rgba(98, 225, 255, .45)", 1);
       });
+
+      line3D(nose, engine, yaw, pitch, roll, "rgba(244, 251, 255, .34)", 1.1);
 
       const nosePoint = project(nose, yaw, pitch, roll);
       context.beginPath();
