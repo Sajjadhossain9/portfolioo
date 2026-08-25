@@ -298,14 +298,28 @@ export default function App() {
           </div>
 
           <h1>
-            Engineering the link between
-            <span> flight, electronics & software.</span>
+            A FULL STACK WEB DEVELOPER WITH KEEN INTEREST IN
+            <span> ELECTRONICS AND EMBEDDED SYSTEMS</span>
           </h1>
 
           <p>
-            I&apos;m <strong>Md. Sajjad Hossain</strong>, an avionics engineering
-            student building embedded sensing, intelligent flight interfaces
-            and software that turns system data into confident decisions.
+            I am an Avionics Engineering student with a keen interest in electronics,
+            programming, circuit design, and embedded systems. I have developed
+            multidisciplinary hands-on skills in circuit integration, sensor interfacing,
+            PCB design and fabrication, microcontroller- and microprocessor-based systems,
+            and embedded C and Python programming. I have participated in several technical
+            projects at university, where I applied innovative problem-solving skills and
+            gained practical engineering experience. Passionate about avionics technology
+            and continuous learning, I am eager to contribute my technical knowledge,
+            teamwork, and dedication to real-world engineering projects. Although I am still
+            expanding my technical knowledge, I am highly dedicated to learning and eager to
+            implement new concepts and technologies. In addition, I am part of a small
+            software service startup where we design, develop, and maintain websites, web
+            applications, and user interfaces as a result of our passion for technology. I
+            also work part-time as a volunteer with RCY and VFB, where I actively participate
+            in initiatives related to national and environmental crises. Through these
+            activities, I have also developed experience in fundraising, team management,
+            coordination, and collaborative work.
           </p>
 
           <div className="actions">
