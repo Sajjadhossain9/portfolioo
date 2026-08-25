@@ -101,6 +101,41 @@ const experience = [
   },
 ];
 
+const softwareProjects = [
+  {
+    number: "C-01",
+    title: "AAUB Routine Companion",
+    type: "schedule",
+    status: "PWA / DEPLOYED",
+    description:
+      "A university routine companion for classes, assignments, lab reminders and exam readiness, designed for fast daily use on mobile.",
+    stack: ["JavaScript", "PWA", "Service Worker"],
+    source: "https://github.com/Sajjadhossain9/aaub-routine-app",
+    live: "https://sajjadhossain9.github.io/aaub-routine-app/",
+  },
+  {
+    number: "C-02",
+    title: "MATLAB Simulation Lab",
+    type: "waveform",
+    status: "MODELING / ACTIVE",
+    description:
+      "A growing collection of numerical experiments and visual models, including waves, polar plots, 3D surfaces, helices and Lissajous figures.",
+    stack: ["MATLAB", "Simulation", "Data Visualization"],
+    source: "https://github.com/Sajjadhossain9/Matlab-Simulation-and-Modeling",
+  },
+  {
+    number: "C-03",
+    title: "Wavnix Web System",
+    type: "interface",
+    status: "TYPESCRIPT / LIVE",
+    description:
+      "A deployed TypeScript web experience focused on modern interface structure, responsive composition and production delivery.",
+    stack: ["TypeScript", "Responsive UI", "Vercel"],
+    source: "https://github.com/Sajjadhossain9/soft12",
+    live: "https://soft12.vercel.app",
+  },
+];
+
 function Arrow() {
   return (
     <svg viewBox="0 0 20 20" aria-hidden="true">
@@ -126,6 +161,46 @@ function SectionHeading({ index, label, title, copy }) {
         {copy && <p>{copy}</p>}
       </div>
     </header>
+  );
+}
+
+function ProjectVisual({ type }) {
+  if (type === "schedule") {
+    return (
+      <div className="project-visual schedule-visual" aria-hidden="true">
+        <div className="mini-top"><i /><i /><i /><span /></div>
+        <div className="schedule-days"><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span></div>
+        <div className="schedule-slots">
+          {Array.from({ length: 15 }, (_, index) => <i key={index} />)}
+        </div>
+        <div className="schedule-alert"><i /> NEXT LAB / 14:30</div>
+      </div>
+    );
+  }
+
+  if (type === "waveform") {
+    return (
+      <div className="project-visual waveform-visual" aria-hidden="true">
+        <span>f(t) / SIGNAL MODEL</span>
+        <svg viewBox="0 0 620 220" preserveAspectRatio="none">
+          <path className="wave-grid" d="M0 55H620M0 110H620M0 165H620M103 0V220M206 0V220M309 0V220M412 0V220M515 0V220" />
+          <path className="wave-one" d="M0 112 C38 20 78 20 116 112 S194 204 232 112 310 20 348 112 426 204 464 112 542 20 620 112" />
+          <path className="wave-two" d="M0 112 C52 58 82 58 128 112 S204 166 254 112 332 58 382 112 458 166 508 112 578 58 620 98" />
+        </svg>
+        <div><b>X</b><b>Y</b><b>Z</b></div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="project-visual interface-visual" aria-hidden="true">
+      <div className="browser-bar"><i /><i /><i /><span /></div>
+      <div className="interface-shell">
+        <aside><i /><i /><i /><i /></aside>
+        <div><span /><strong /><small /><small /><b /></div>
+      </div>
+      <em>RESPONSIVE / 03</em>
+    </div>
   );
 }
 
@@ -195,6 +270,7 @@ export default function App() {
           <a href="#profile" onClick={closeMenu}>Profile</a>
           <a href="#systems" onClick={closeMenu}>Systems</a>
           <a href="#missions" onClick={closeMenu}>Missions</a>
+          <a href="#code" onClick={closeMenu}>Code</a>
           <a href="#contact" className="nav-contact" onClick={closeMenu}>Establish contact</a>
         </div>
       </nav>
@@ -248,8 +324,11 @@ export default function App() {
           <div className="orbit one"><i /></div>
           <div className="orbit two"><i /></div>
           <div className="identity-core">
-            <strong>SH</strong>
-            <span>AVIONICS / 04</span>
+            <img
+              src="https://avatars.githubusercontent.com/u/219995643?v=4"
+              alt="Md. Sajjad Hossain"
+            />
+            <span>SAJJAD / AVIONICS 04</span>
           </div>
           <span className="hud-label top">AVN-SYS / ID VERIFIED</span>
           <span className="hud-label right">ALT 03620<br />HDG 042°</span>
@@ -406,6 +485,52 @@ export default function App() {
               <p>{item.text}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="code-lab section shell" id="code">
+        <SectionHeading
+          index="05"
+          label="Software flight deck"
+          title="Ideas translated into working interfaces."
+          copy="Selected public repositories where planning, interaction design and code meet a deployed result."
+        />
+
+        <div className="software-grid">
+          {softwareProjects.map((project, index) => (
+            <article
+              className="software-card reveal"
+              style={{ "--delay": `${index * 80}ms` }}
+              key={project.number}
+            >
+              <header>
+                <span>{project.number}</span>
+                <small><i /> {project.status}</small>
+              </header>
+              <ProjectVisual type={project.type} />
+              <div className="software-copy">
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+                <div className="software-stack">
+                  {project.stack.map((item) => <b key={item}>{item}</b>)}
+                </div>
+              </div>
+              <footer>
+                <a href={project.source} target="_blank" rel="noreferrer">Source code ↗</a>
+                {project.live && <a href={project.live} target="_blank" rel="noreferrer">Live system ↗</a>}
+              </footer>
+            </article>
+          ))}
+        </div>
+
+        <div className="github-bridge reveal">
+          <div>
+            <span>PUBLIC DEVELOPMENT LOG</span>
+            <strong>More experiments, repositories and progress are available on GitHub.</strong>
+          </div>
+          <a className="button secondary" href="https://github.com/Sajjadhossain9?tab=repositories" target="_blank" rel="noreferrer">
+            Open GitHub profile <Arrow />
+          </a>
         </div>
       </section>
 
