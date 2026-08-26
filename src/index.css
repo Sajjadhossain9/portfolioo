@@ -44,6 +44,7 @@ body::before {
 a, button { font: inherit; }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
 .shell { width: min(calc(100% - 48px), 1280px); margin-inline: auto; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; border: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
 .skip-link { position: fixed; top: 12px; left: 12px; z-index: 100; padding: 12px 16px; color: #001014; background: var(--cyan); font: 700 9px var(--mono); letter-spacing: .1em; text-decoration: none; text-transform: uppercase; transform: translateY(-150%); transition: transform .18s ease; }
 .skip-link:focus { transform: translateY(0); }
 
@@ -119,8 +120,8 @@ main { position: relative; isolation: isolate; overflow: clip; }
   animation: pulse 2s ease-in-out infinite;
 }
 .nominal { color: var(--green); }
-.hero h1 { max-width: 820px; margin: 0; font-size: clamp(3.2rem, 6.2vw, 6.7rem); font-weight: 580; line-height: .92; letter-spacing: -.055em; text-transform: uppercase; }
-.hero h1 span { display: block; margin-top: .12em; color: transparent; background: linear-gradient(95deg,#f4fcfc 2%,var(--cyan) 33%,var(--violet) 61%,var(--magenta) 81%,var(--orange) 100%); background-size: 180% 100%; background-clip: text; animation: spectrum-shift 7s ease-in-out infinite alternate; }
+.hero h2 { max-width: 820px; margin: 0; font-size: clamp(3.2rem, 6.2vw, 6.7rem); font-weight: 580; line-height: .92; letter-spacing: -.055em; text-transform: uppercase; }
+.hero h2 span { display: block; margin-top: .12em; color: transparent; background: linear-gradient(95deg,#f4fcfc 2%,var(--cyan) 33%,var(--violet) 61%,var(--magenta) 81%,var(--orange) 100%); background-size: 180% 100%; background-clip: text; animation: spectrum-shift 7s ease-in-out infinite alternate; }
 .hero-copy > p { max-width: 670px; margin: 34px 0 0; color: #9db1b7; font-size: clamp(1rem,1.5vw,1.2rem); line-height: 1.75; }
 .hero-copy > p strong { color: var(--text); font-weight: 500; }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
@@ -379,7 +380,7 @@ main { position: relative; isolation: isolate; overflow: clip; }
   .nav { min-height: 72px; padding-inline: 12px; }
   .brand > span:last-child { display: none; }
   .hero { padding-top: 120px; }
-  .hero h1 { font-size: clamp(2.65rem,14vw,4.2rem); }
+  .hero h2 { font-size: clamp(2.65rem,14vw,4.2rem); }
   .nominal { display: none; }
   .actions { display: grid; }
   .button { width: 100%; }

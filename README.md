@@ -15,7 +15,7 @@ The site turns a traditional engineering CV into an interactive technical narrat
 
 - Animated avionics radar identity display
 - CV-based profile, technical systems and field log
-- Interactive rocket, engine-monitoring, radar and drone mission dossiers
+- Interactive avionics, engine-monitoring, radar and drone mission dossiers
 - Full-stack development, embedded systems and avionics capabilities
 - Responsive navigation and mobile layouts
 - Reduced-motion support and keyboard accessibility

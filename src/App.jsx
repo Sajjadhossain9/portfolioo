@@ -85,12 +85,6 @@ const experience = [
     text: "Control-interface and UI/UX concepts for an aerial surveillance platform.",
   },
   {
-    period: "COMPETITION",
-    role: "Team Lead",
-    place: "TEAM AVYBARQ / IEEE CASS SDC",
-    text: "Coordinating a multidisciplinary team across circuits, system design and technical delivery.",
-  },
-  {
     period: "COMMUNITY",
     role: "Volunteer & Organizer",
     place: "RCY · VFB · BADHON",
@@ -199,6 +193,9 @@ export default function App() {
 
   return (
     <main>
+      <h1 className="sr-only">
+        Md. Sajjad Hossain - Full-stack Web Developer and Avionics Engineering Student
+      </h1>
       <a className="skip-link" href="#profile">Skip to portfolio content</a>
       <div className="ambient-spectrum" aria-hidden="true">
         <i className="ambient-orb orb-cyan" />
@@ -217,10 +214,10 @@ export default function App() {
             <span className="nominal">SYSTEMS NOMINAL</span>
           </div>
 
-          <h1>
+          <h2>
             Full-stack web developer with a keen interest in
             <span> electronics and embedded systems for aviation.</span>
-          </h1>
+          </h2>
 
           <p>
             I am an Avionics Engineering student and full-stack web developer working
@@ -232,26 +229,11 @@ export default function App() {
             <a className="button primary" href="#missions">
               Explore missions <Arrow />
             </a>
-            <a
-              className="button secondary"
-              href="https://github.com/Sajjadhossain9"
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub telemetry
-            </a>
-            <a
-              className="button secondary cv-download"
-              href={`${import.meta.env.BASE_URL}Sajjad-Hossain-CV-Redacted.pdf`}
-              download="Md-Sajjad-Hossain-CV.pdf"
-            >
-              Download CV <Arrow />
-            </a>
           </div>
 
           <div className="telemetry">
             <div><span>LOC</span><strong>Lalmonirhat, BD</strong></div>
-            <div><span>FOCUS</span><strong>Rocket avionics</strong></div>
+            <div><span>FOCUS</span><strong>Avionics systems</strong></div>
             <div><span>LOCAL</span><strong>{time} BST</strong></div>
           </div>
         </div>
